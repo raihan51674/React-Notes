@@ -242,3 +242,18 @@ const App = () => {
 };
 
 ```
+### Counteris :
+#### 1. Toggle :
+```js
+const App = () => {
+  const [visited, sertvisited]=useState(false)
+  const handleToggle=()=>{
+    sertvisited(!visited)
+  }
+  return (
+    <div>
+      <button onClick={handleToggle}>{visited ? "Visited" : "Not Visited"}</button>
+    </div>
+  );
+};
+```
