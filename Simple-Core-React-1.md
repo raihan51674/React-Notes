@@ -121,3 +121,124 @@ function MyAdda({value,song}){
   )
 }
 ```
+### React Core Concept part -2
+#### 1.Event Handle :
+```js
+const App = () => {
+  const handleClick=(e)=>{
+   e.preventDefault()
+   alert("hello")
+  }
+  const handleParameter=(para)=>{
+    const sum = 3 + para
+    alert(sum)
+  }
+  return (
+    <div>
+      <h1>Hello React</h1>
+      <button onClick={handleClick}>Click me</button>
+      {/* just button call fuction */}
+      <button onClick={()=> alert("just function")}>Just Function</button>
+      {/* parameter given */}
+      <button onClick={handleParameter(4)}>Add number</button>
+    </div>
+  );
+};
+
+```
+#### 2.State Change (UI chane and remember value after value ) use : dark and light moode,true fasle toggle
+```js
+const Batmen = () => {
+  const [Run, setRun]=useState(0) //value 0,false,"",[],{},null
+  const handleClick=()=>{
+    const updateCount = Run + 1
+    setRun(updateCount)
+  }
+  const handleSix=()=>{
+    const UpdateSix = Run + 6
+    setRun(UpdateSix)
+
+  }
+  return (
+    <div>
+      {
+        Run > 10 && <p>Oww 10 Run compleated</p>
+      }
+      <h1>Counter : {Run}</h1>
+      <button onClick={handleClick}>Single Run</button>
+      <button onClick={handleSix}>Six</button>
+
+    </div>
+  );
+};
+
+```
+#### 3.Data Load and api call using Suspense(loader add)
+```js
+//First way data loadf
+const FetchUser=fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json());
+//Second way data load
+const FetchFriends=async()=>{
+  const responseData=await fetch("https://jsonplaceholder.typicode.com/users")
+  return responseData.json()
+}
+
+const App = () => {
+  const FriendPromise = FetchFriends()
+  return (
+    <div>
+      <Suspense fallback={<h2>Loading data ...</h2>}>
+      <Users FetchUser={FetchUser}></Users>
+      </Suspense>
+      {/* second way data load */}
+      <Suspense fallback={<h2>Friends are coming ...</h2>}>
+        <Friends FriendPromise={FriendPromise}></Friends>
+      </Suspense>
+    </div>
+  );
+};
+
+function Users({FetchUser}){
+  const UsersData=use(FetchUser)
+  console.log(UsersData);
+  return(
+    <div>
+     <h2>Show User ALL Data : {UsersData.length}</h2>
+    </div>
+  )
+}
+function Friends({FriendPromise}) {
+  const FriendsData=use(FriendPromise)
+  return(
+    <div>
+    <h2>Friends Data: {FriendsData.length}</h2>
+    {
+      FriendsData.map(data=>{
+        return <div key={data.id}>
+          <h2>{data.name}</h2>
+        </div>
+      })
+    }
+    </div>
+  ) 
+}
+```
+#### 4.Data Load UseEffect() using
+```js
+const App = () => {
+  const [player, setPlayer]=useState([])
+
+  useEffect(()=>{
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res=>res.json())
+    .then(data=>setPlayer(data))
+  },[])
+  
+  return (
+    <div>
+      <h3>Players:{player.length} </h3>
+    </div>
+  );
+};
+
+```
