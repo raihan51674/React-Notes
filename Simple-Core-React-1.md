@@ -73,3 +73,51 @@ function TodoVariable({done, task, time}){
 }
 
 ```
+### 3.Map Useing Object and array
+```js
+function App() {
+  const friends =["raihan","rifat","mamun","kader"]
+  const singer =[
+    {id:1, name:"AR Rahman",age:56},
+    {id:2, name:"Salma Rahman",age:26},
+    {id:3, name:"Arjit sing",age:36}
+  ]
+  return (
+    <div>
+      <h1>Hello React</h1>
+      <Student friends={friends}  singer={singer}></Student>
+    </div>
+  );
+}
+function Student({friends,singer}) {
+  return (
+    <div>
+      {/* //array pass useing map */}
+     {
+      friends.map((value,index)=>{ //{} use so must return
+        return <MyAdda  key={index} value={value}>{value}</MyAdda> 
+      })
+     } 
+     {/* //Object pass using map */}
+     {
+      singer.map((song)=>{
+        return <MyAdda key={song.id} song={song}></MyAdda>
+      })
+     }
+    </div>
+  );
+}
+//show array data
+function MyAdda({value,song}){
+  return(
+    <div>
+      {
+        value &&  <p>All Friends Name show: {value}</p>
+      }
+      {
+        song && <h1>Singer Details show : {song.name} and {song.age}</h1>
+      }
+    </div>
+  )
+}
+```
