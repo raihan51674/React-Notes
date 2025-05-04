@@ -96,6 +96,8 @@ const User2 = ({FetchPromise}) => {
     </div>
   );
 
+
+//extra styleing
 {/* <Suspense fallback={
         <div style={{
           display: "flex",
@@ -106,6 +108,28 @@ const User2 = ({FetchPromise}) => {
     <p>Loading data...</p>
     </div>}>
 </Suspense> */}
+```
+### 4.5 Data load  instaln button ar niche show: 1 ta show with loader
+```js
+//user componenet
+const [showInfo, setShowInfo]=useState(false)
+const userPromis= fetch(`https://jsonplaceholder.typicode.com/users/${data.id}`).then(res=>res.json())
+//return ar por
+<button onClick={()=>setShowInfo(!showInfo)}>{showInfo ? "Hide":"Show"}-Info</button>
+{
+ showInfo && <Suspense fallback={<p>Loadng...</p>}>
+<INstalDataLoadDetails userPromis={userPromis}></INstalDataLoadDetails>
+</Suspense>
+}
+//data show
+const INstalDataLoadDetails = ({userPromis}) => {
+  const {name,username}=use(userPromis)
+  return (
+    <div>
+      <h1>Show ingo {name} and {username}</h1>
+    </div>
+  );
+};
 ```
 ### 5.Dynamic Route:
 ```js
@@ -131,8 +155,53 @@ const UserDetails = () => {
   );
 };
 
+//route.jsx ar loader teke params ar id dore je kono componenet a use korte parvo
+const {Id}=useParams()
+  console.log(Id);
+```
+### 6.useNavigate / redirect(spacific place where)
+```js
+//1.useNavigate
+const navigate=useNavigate()
+<button onClick={()=>navigate("/")}>Dekhao Product</button>
+<button onClick={()=>navigate(`/user/${data.id}`)}>Dekhao Product</button>
+
+//previous section
+<button onClick={()=>navigate(-1)}>Go Back</button>
+
+//componen akare use
+ const [VisitHome,setVisitHome]=useState(false)
+if(VisitHome){
+   return <Navigate to="/"></Navigate>
+  }
+//return ar por
+ <button onClick={()=>setVisitHome(true)}>Vist Home</button>
+```
+### 7.Loader add Global 
+```js
+//Global
+const RootLayout = () => {
+  const navigation=useNavigation()
+  const isNavigating =Boolean(navigation.location)
+  return (
+    <div>
+      <Header></Header>
+      {isNavigating && <p>Loading...</p> }
+      <Outlet></Outlet>
+    </div>
+  );
+};
 
 ```
+### 8.Not Found 404 Route
+```js
+//use paren route
+ {
+    path:"*",
+    element:<h2>Not Found</h2>
+  }
+```
+### 9.useLocation :
 
 
 
