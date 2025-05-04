@@ -95,6 +95,43 @@ const User2 = ({FetchPromise}) => {
       <h2>User-2 {UserData.length}</h2>
     </div>
   );
+
+{/* <Suspense fallback={
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh"
+        }}>
+    <p>Loading data...</p>
+    </div>}>
+</Suspense> */}
+```
+### 5.Dynamic Route:
+```js
+//1.Routes.jsx
+{path:"user/:Id" , 
+loader : ({params})=> fetch(`https://jsonplaceholder.typicode.com/users/${params.Id}`),
+Component:UserDetails}
+
+//2.link add show more
+<Link to={`/user/${data.id}`}>Show Details</Link>
+
+//3.show data
+const UserDetails = () => {
+  const Userdata=useLoaderData()
+  console.log(Userdata);
+  const {name,email,address}=Userdata
+  return (
+    <div>
+      <h1>{name}</h1>
+      <h2>{email}</h2>
+      <h3>{address.city}</h3>
+    </div>
+  );
+};
+
+
 ```
 
 
