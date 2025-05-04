@@ -1,6 +1,10 @@
 ## React part-2
 ### 1.Custom Navigation:
 ```js
+//1.custom navigation
+//2.Rechart,axios
+//3.react Router(3) and Outlet
+//4.load Data : Loader and useLoader
 const Navigation=[
   {
     name : "Home",
@@ -50,6 +54,47 @@ const data=axios.get("api url");
 ### 3. React Router :
 ```js
 
+```
+### 4.Data load /Loader
+```js
+//.1 first way
+//Router.jsx add
+{path:"user",
+loader :()=>fetch("https://jsonplaceholder.typicode.com/users") ,
+Component:User},
+
+//use
+const User = () => {
+  const UserData=useLoaderData()
+  console.log(UserData);
+  return (
+ <h3>
+{ UserData.map((data)=> <h2 key={data.id}>{data.name}</h2>}
+</h3>)
+);
+};
+
+//2.second way
+//Router.jsx
+const FetchPromise = fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json())
+export const router = createBrowserRouter([
+  {
+{path:"user2",
+element:<Suspense fallback={<p>Loading data...</p>}>
+ <User2 FetchPromise={FetchPromise} ></User2>
+</Suspense>
+},
+}
+
+//use
+const User2 = ({FetchPromise}) => {
+  const UserData=use(FetchPromise)
+  console.log(UserData);
+  return (
+    <div>
+      <h2>User-2 {UserData.length}</h2>
+    </div>
+  );
 ```
 
 
