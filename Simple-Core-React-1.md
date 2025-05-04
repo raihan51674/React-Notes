@@ -3,6 +3,12 @@
 #### 1.Componenet 2.JSX and function name always Capital letter
 #### 1.Props (data communication at a components) and only preant to child
 ```js
+//1.props
+//2.Conditopn rendering
+//3.map
+//4.event
+//5.State
+//6.Data load
 function App() {
   return (
     <div>
