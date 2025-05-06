@@ -5,6 +5,10 @@
 //2.Rechart,axios
 //3.react Router(3) and Outlet
 //4.load Data : Loader and useLoader
+
+
+
+//Navbar section must be add "w-11/12 mx-auto fixed left-0 right-0 z-50 "
 const Navigation=[
   {
     name : "Home",
