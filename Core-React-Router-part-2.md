@@ -111,6 +111,15 @@ const User2 = ({FetchPromise}) => {
   );
 
 
+
+
+//3.way data load same componenet
+const FetchPromis =fetch("/subscriptionData.json").then((res)=>res.json())
+  const SubscriptionCard = () => {
+  const data =use(FetchPromis)
+  console.log(data);
+
+
 //extra styleing
 {/* <Suspense fallback={
         <div style={{
